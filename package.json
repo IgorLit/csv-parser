@@ -1,0 +1,25 @@
+{
+  "name": "csv-parser-task",
+  "version": "1.0.0",
+  "description": "parse csv and txt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgorLit/csv-parser.git"
+  },
+  "author": "Litvinovich Igor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IgorLit/csv-parser/issues"
+  },
+  "homepage": "https://github.com/IgorLit/csv-parser#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "neat-csv": "^2.1.0"
+  }
+}

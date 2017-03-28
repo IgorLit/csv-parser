@@ -2,10 +2,11 @@ const express = require('express');
 module.exports = (parseService) => {
     const router = express.Router();
 
-    router.get('/', (req, res) => {
-        parseService.parse().then((result) => {
+    router.post('/', (req, res) => {
+        parseService.parse(req.body.path).then(result => {
             res.json(result);
-            res.end();
+        }).catch(error => {
+            res.json({error});
         });
     });
     return router;

@@ -1,19 +1,22 @@
-var csv = require('csv-parser')
-var fs = require('fs');
+const fs = require('fs');
+const neatCsv = require('neat-csv');
+
 module.exports = () => {
+
     function ParseService() {
         let self = this;
-
         self.parse = parse;
-
         function parse(path) {
             return new Promise((resolve, reject) => {
-                fs.createReadStream('../Demo.csv')
-                    .pipe(csv())
-                    .on('data', function (data) {
-                        console.log('Name: %s Age: %s', data.NAME, data.AGE)
-                    })
-                resolve({success: "true"});
+                fs.readFile('../../' + path, (error, data) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        neatCsv(data).then(result => {
+                            resolve(result);
+                        });
+                    }
+                })
             });
         }
     }

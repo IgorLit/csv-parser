@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div>
+    <input type="text" id="path" placeholder="enter path here">
+    <input id="go" type="button" value="Go">
+</div>
+<div id="content">
+    <div id="error"></div>
+    <ul class="mylist">
+    </ul>
+</div>
+<script>
+    $('#go').on('click', function () {
+        $.post("/parse", {path: $('#path').val()}, function (entries) {
+            var cList = $('ul.mylist').html('');
+            var errorElement = $('#error').html('');
+            if(entries.error){
+                console.log(entries.error);
+                $('<span/>').css('color', 'red').text('wrong path').appendTo(errorElement);
+                return;
+            }
+            $.each(entries, function (i) {
+                var li = $('<li/>')
+                    .appendTo(cList);
+                var aaa = $('<span/>')
+                    .text(entries[i].Cost + ', ' +
+                        entries[i].Day + ', ' +
+                        entries[i].Impressions + ', ' +
+                        entries[i].Search_Type + ', ' +
+                        entries[i].Site)
+                    .appendTo(li);
+            });
+        });
+    });
+</script>
+</body>
+</html>
